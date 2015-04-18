@@ -20,32 +20,32 @@ public class Fix{
 		for (int i=0; i<team; i++){
 			for (int j=0; j<date; j++){
 				//tratamiento especial para la primera columna
-				if (i==0){
+				if (j==0){
 					//cargo el equipo como local
 					//LocalVisit x = getLocalTeam(j,aTable);
-					if(j%2==0){
-						LocalVisit tupla = new LocalVisit();
+					if(i%2==0){
 						//reinicia el indice si termine de poner todos los equipos
 						if(index<listTeam.size()){
+							LocalVisit tupla = new LocalVisit();
 							tupla.setLocal(listTeam.get(index));
-							//System.out.println("**********************");
 							aTable[i][j]=tupla;
-							System.out.println("fecha "+j+" "+tupla.getLocal());
+							System.out.println(tupla.getLocal());
 							index++;
 						}
 						else{
 							index=0;
+							LocalVisit tupla = new LocalVisit();
 							tupla.setLocal(listTeam.get(index));
 							aTable[i][j]=tupla;
 							index++;
-							//System.out.println(tupla.getLocal());
+							System.out.println(tupla.getLocal());
 						}
 					}
 					//cargo el equipo como visitante
 					else{
-						LocalVisit tupla = new LocalVisit();
 						//reinicia el indice si termine de poner todos los equipos
 						if(index<listTeam.size()){
+							LocalVisit tupla = new LocalVisit();
 							tupla.setVisit(listTeam.get(index));
 							aTable[i][j]=tupla;
 							index++;
@@ -53,28 +53,30 @@ public class Fix{
 						}
 						else{
 							index=0;
+							LocalVisit tupla = new LocalVisit();
 							tupla.setVisit(listTeam.get(index));
 							aTable[i][j]=tupla;
 							index++;
-							//System.out.println(tupla.getVisit());
+							System.out.println(tupla.getVisit());
 						}
 					}
 				}
 				//tratamiento para el resto de los partidos
 				else{
 					//reinicia el indice si termine de poner todos los equipos
-					LocalVisit tupla = new LocalVisit();
 					if(index<listTeam.size()){
+						LocalVisit tupla = new LocalVisit();
 						tupla.setLocal(listTeam.get(index));
 						aTable[i][j]=tupla;
-						System.out.println("fecha "+j+" "+tupla.getLocal());
+						System.out.println(tupla.getLocal());
 					}
 					else{
 						index=0;
+						LocalVisit tupla = new LocalVisit();
 						tupla.setLocal(listTeam.get(index));
 						aTable[i][j]=tupla;
 						index++;
-						System.out.println("fecha "+j+" "+tupla.getLocal());
+						System.out.println(tupla.getLocal());
 					}
 				}
 			}
@@ -89,15 +91,16 @@ public class Fix{
 		listOfTeam.add("3");
 		listOfTeam.add("4");
 		listOfTeam.add("5");
+		listOfTeam.add("6");
 		fixture.completeLocal(listOfTeam, fixture.table);
-		//for (int i=0; i<play; i++){
-		//	System.out.println(" ");
-		//	for (int j=0; j<date; j++){
-		//		LocalVisit aux=fixture.table[i][j];
-		//		System.out.print(aux.getLocal());
-		//		System.out.print(aux.getVisit());
-		//	}
-		//}
+		for (int i=0; i<play; i++){
+			System.out.println(" ");
+			for (int j=0; j<date; j++){
+				LocalVisit aux=fixture.table[i][j];
+				System.out.print(aux.getLocal());
+				System.out.print(aux.getVisit());
+			}
+		}
 	}
 }
 
