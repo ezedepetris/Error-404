@@ -1,6 +1,8 @@
 public class Fixture{
 
 	private int[][] table;
+	static final int team=4;
+	static final int date=(team-1);
 
 
 	//constructir
@@ -17,13 +19,18 @@ public class Fixture{
 		table[i][j]=x;
 	}
 
+	//retorna un elemento de la tabla
+	public int getTeam(int i, int j){
+		return (table[i][j]);
+	}
+
 	//hacela la primera pasada por la tabla cargando los valores
-	public void firstInstanceOfCreateDate(int date){
+	public void firstInstanceOfCreateDate(){
 		int x=1;
 		for(int  i=0; i<team; i++){
-			for(int j=0: j<team; j++){
-				table.addTeam(i,j,x);
-				if (x<>team){
+			for(int j=0; j<date; j++){
+				this.addTeam(i,j,x);
+				if (x!=team){
 					x++;
 				}
 				else{
@@ -35,12 +42,12 @@ public class Fixture{
 	}
 
 	//hacela la segunda pasada por la tabla cargando los valores
-	public void SecondInstanceOfCreateDate(int date){
+	public void secondInstanceOfCreateDate(){
 		int x=team;
 		for(int  i=0; i<team; i++){
-			for(int j=0: j<team; j++){
-				table.addTeam(i,j,x);
-				if (x<>1){
+			for(int j=0; j<date; j++){
+				this.addTeam(i,j,x);
+				if (x!=1){
 					x--;
 				}
 				else{
@@ -51,5 +58,17 @@ public class Fixture{
 		}
 	}
 
-	
+	public static void main(String[] args) {
+
+		Fixture tableOfTeams = new Fixture();
+		tableOfTeams.firstInstanceOfCreateDatef();
+		tableOfTeams.secondInstanceOfCreateDate();
+			for(int  i=0; i<team; i++){
+				System.out.println(" ");
+				for(int j=0; j<date; j++){
+					System.out.print(tableOfTeams.getTeam(i,j));
+				}
+			}
+	}
+
 }
