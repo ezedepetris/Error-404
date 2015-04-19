@@ -12,6 +12,19 @@ public class Test {
 		arreglo.add("8");
 		arreglo.add("9");
 		arreglo.add("10");
+
+
+
+			arreglo.add("12");
+		arreglo.add("23");
+		arreglo.add("34");
+		arreglo.add("45");
+		arreglo.add("56");
+		arreglo.add("67");
+		arreglo.add("78");
+		arreglo.add("89");
+		arreglo.add("90");
+		arreglo.add("101");
 		Fixture.fixture(arreglo);
 	}
 }
