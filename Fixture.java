@@ -8,8 +8,8 @@ public class Fixture{
 		int numMatch = (team/2);
 		LocalVisit[][] table = new LocalVisit[date][numMatch];
 		
-		table = Fixture.comoandas(listTeam,table,date);
 		table = Fixture.completeLocal(listTeam,table,numMatch,date);
+		table = Fixture.comoandas(listTeam,table,date);
 		table = Fixture.addVisit(listTeam,table,numMatch,date);
 		Fixture.printFixture(table,numMatch,date);
 
@@ -17,15 +17,14 @@ public class Fixture{
 
 	public static LocalVisit[][] comoandas (ArrayList<String> listTeamAux, LocalVisit[][] tableAux, int dates){
 		int i = 0;
-		LocalVisit aux1 = new LocalVisit();
-		LocalVisit aux2 = new LocalVisit();
-		aux2.setVisit(listTeamAux.get(listTeamAux.size()-1));
-		aux1.setLocal(listTeamAux.get(listTeamAux.size()-1));
+		LocalVisit tupla;
 		while(i < dates){
+			tupla = tableAux[i][0];
 			if(i%2==0)
-				tableAux[i][0] = aux1;
+				tupla.setLocal(listTeamAux.get(listTeamAux.size()-1));
 			else
-				tableAux[i][0] = aux2;
+				tupla.setVisit(listTeamAux.get(listTeamAux.size()-1));
+			tableAux[i][0] = tupla;
 			i++;
 		}
 		return tableAux;
@@ -37,19 +36,16 @@ public class Fixture{
 public static LocalVisit[][] completeLocal(ArrayList<String> listTeam, LocalVisit[][] aTable, int matches, int dates){
 	
 	int index = 0;
-	for (int i = 0; i< matches; i++){
-		for (int j = 0; j< dates; j++){
+	for (int x = 0; x< dates; x++){
+		for (int y = 0; y< matches; y++){
 			LocalVisit tupla = new LocalVisit();
-			if (i==0 &&j%2==0){	//tratamiento especial para la primera columna
-				//if(j%2==0){//cargo el equipo como visitante
-					tupla = aTable[j][i];						
-					tupla.setVisit(listTeam.get(index));
-				}
+			if (y==0 && x%2==0)	//tratamiento especial para la primera columna
+				tupla.setVisit(listTeam.get(index));
 			else
 				tupla.setLocal(listTeam.get(index));
-			aTable[j][i]=tupla;
+			aTable[x][y]=tupla;
 			index++;
-			if(index>listTeam.size()-1)
+			if(index>listTeam.size()-2)
 				index = 0;//reinicia el indice si termine de poner todos los equipos
 		}
 	}
@@ -60,17 +56,16 @@ public static LocalVisit[][] completeLocal(ArrayList<String> listTeam, LocalVisi
 
 /** Pre : numOfTeams mod 2 = 0 **/
 	public static LocalVisit[][] addVisit(ArrayList<String> listOfTeamsAux, LocalVisit[][] tableAux, int matches, int dates){
-		int index = 9;
-		for (int y = 1;  y < matches; y++){ //Evito la primer columna de la tabla, por eso i=1 y NO 1=0
-			for (int x = 0; x < dates; x++){
+		int index = dates;
+		for (int x = 0; x < dates; x++){
+			for (int y = 1;  y < matches; y++){ //Evito la primer columna de la tabla, por eso i=1 y NO 1=0
 				LocalVisit aux = tableAux[x][y];
 				String auxiliar = listOfTeamsAux.get(index-1);	
-				System.out.println(auxiliar);
 				aux.visit = auxiliar; //Seteo el valor Visit en la instancia aux creada
 				tableAux[x][y] = aux; //Le asigno el valor Visit seteado al Tablero
 				index--; //decremento el indice que recorre el ArrayList
 				if (index == 0)
-					index = 9;	
+					index = dates;	
 			}
 		}	
 		return tableAux;
@@ -81,9 +76,12 @@ public static LocalVisit[][] completeLocal(ArrayList<String> listTeam, LocalVisi
 	public static void printFixture(LocalVisit[][] tableAux, int matches, int dates){
 		LocalVisit aux;
 		for (int y = 0;  y < matches; y++){ //Evito la primer columna de la tabla, por eso i=1 y NO 1=0
+			System.out.println("***********");
+			System.out.println("fecha N "+(y+1));
+			System.out.println("***********");
 			for (int x = 0; x < dates; x++){	
 				aux = tableAux[x][y];
-				System.out.println(" juega el equipo "+aux.getLocal()+" como local, contra el equipo "+aux.getVisit()+" como visitante");
+				System.out.println("partido N-> "+(x+1)+" juega el equipo "+aux.getLocal()+" como local, contra el equipo "+aux.getVisit()+" como visitante");
 			}
 		}
 	}
