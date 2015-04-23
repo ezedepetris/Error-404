@@ -47,8 +47,12 @@ public class Sudoku{
 	}
 
 	public static Boolean hasConflict(Integer[][] board){
-		// if(!Sudoku.checkWin(board))
-		// 	return false;
+		if(!Sudoku.checkAllSquare(board))
+			return true;
+
+
+		if(!Sudoku.checkWin(board))
+			return true;
 
 		for(int y = 0;y < 9;y++)
 			for(int x = 0;x < 9;x++)
@@ -78,11 +82,11 @@ public class Sudoku{
 		for(i = 1; i<=9;i++)
 			list.add(i);
 
-		for(y = 1; y <= 4; y++){
-			for(x = 1; x <=4; x++){
+		for(y = 1; y <= 3; y++){
+			for(x = 1; x <=3; x++){
 				cond = list.remove(board[x][y]);
-				if(!cond)
-					return false;
+			if(board[x][y]!=null&&!cond)
+				return false;
 			}
 		}
 
@@ -90,11 +94,11 @@ public class Sudoku{
 		for(i = 1; i<=9;i++)
 			list.add(i);
 		
-		for(y = 1; y <= 4; y++){
-			for(x = 5; x <= 8; x++){
+		for(y = 1; y <= 3; y++){
+			for(x = 5; x <= 7; x++){
 				cond =list.remove(board[x][y]);
-				if(!cond)
-					return false;
+			if(board[x][y]!=null&&!cond)
+				return false;
 			}
 		}
 
@@ -102,11 +106,11 @@ public class Sudoku{
 		for(i = 1; i<=9;i++)
 			list.add(i);
 
-		for(y = 5; y <= 8; y++){
-			for(x = 1; x <= 4; x++){
+		for(y = 5; y <= 7; y++){
+			for(x = 1; x <= 3; x++){
 				cond =list.remove(board[x][y]);
-				if(!cond)
-					return false;
+		if(board[x][y]!=null&&!cond)
+				return false;
 			}
 		}
 
@@ -114,14 +118,40 @@ public class Sudoku{
 		for(i = 1; i<=9;i++)
 			list.add(i);
 
-		for(y = 5; y <= 8; y++){
-			for(x = 5; x<= 8; x++){
+		for(y = 5; y <= 7; y++){
+			for(x = 5; x<= 7; x++){
 				cond =list.remove(board[x][y]);
-				if(!cond)
-					return false;
+			if(board[x][y]!=null&&!cond)
+				return false;
 			}
 		}
-		return cond;
+		return true;
+	}
+
+
+	public static Boolean checkAllSquare(Integer[][] board){
+		int i = 0;
+		int j = 0;
+		Boolean cond = true;
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		while(i<9){
+			j=0;
+			while(j<9){
+				list.clear();
+				for(int h = 1; h<=9;h++)
+					list.add(h);
+				for (int y = i; y < i+3;y++ ){
+					for (int x = j;x < j+3 ;x++ ) {
+						cond =list.remove(board[x][y]);
+						if(board[x][y]!=null&&!cond)
+							return false;
+					}
+				}
+				j = j+3;
+			}		
+			i=i+3;
+		}				
+		return true;
 	}
 
 
@@ -157,6 +187,8 @@ public class Sudoku{
 		return (true);
 	}
 	
+
+
 
 public static Integer[][] deepCopy(Integer[][] original) {
     if (original == null) {
