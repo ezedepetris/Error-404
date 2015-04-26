@@ -1,0 +1,16 @@
+Fixture
+Dentro de la carpeta Fixture encontrara tres archivos (Fixture.java, LocalVisit.java y Test.java).
+Lo primero a hacer es compilar todos los codigos con los comandos:
+	javac Fixture.java
+	javac LocalVisit.java
+	javac Test.java
+A continuacion para ejecutar el programa debera ingresar el siguiente comando desde terminal:
+	java Test
+
+Sudoku
+Dentro de la carpeta Sudoku encontrara dos archivos (Sudoku.java y Test.java).
+Lo primero que debe hacer es compilar los dos codigos con los siguientes comandos:
+	javac Sudoku.java
+	javac Test.java
+A continuacion debera ejecutarlo con el siguiente comando desde la terminal:
+	java Test
