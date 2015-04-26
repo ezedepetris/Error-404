@@ -4,29 +4,28 @@ public class Fixture{
 
 	//metodo principal que arma el fixture
 	public static void fixture (ArrayList<String> listTeam){
-		int team = listTeam.size();
-		int date = (team-1);
-		int numMatch = (team/2);
-		LocalVisit[][] table = new LocalVisit[date][numMatch];
+		int team = listTeam.size();//cantidad de equipos
+		int date = (team-1);//fechas a jugar
+		int numMatch = (team/2);//cantidad de equipos por fechas
+		LocalVisit[][] table = new LocalVisit[date][numMatch];//matriz del ficture
 		
 		table = Fixture.completeLocal(listTeam,table,numMatch,date);
-		table = Fixture.comoandas(listTeam,table,date);
+		table = Fixture.loadLastTeam(listTeam,table,date);
 		table = Fixture.addVisit(listTeam,table,numMatch,date);
 		Fixture.printFixture(table,numMatch,date);
 
 	}
 
-	/*primer metodo que se encarga de cargar el primer partido de cada fecha solo con el ultimo equipo
-	alternando su condicion de localia y visita*/
-	public static LocalVisit[][] comoandas (ArrayList<String> listTeamAux, LocalVisit[][] tableAux, int dates){
+	/*segundo metodo quw carga el ultimo equipo en el primer partido de todoas las fechas intercalando local y visitante*/
+	public static LocalVisit[][] loadLastTeam (ArrayList<String> listTeamAux, LocalVisit[][] tableAux, int dates){
 		int i = 0;
 		LocalVisit tupla;
 		while(i < dates){
 			tupla = tableAux[i][0];
 			if(i%2==0)
-				tupla.setLocal(listTeamAux.get(listTeamAux.size()-1));
+				tupla.setLocal(listTeamAux.get(listTeamAux.size()-1));//carga como local
 			else
-				tupla.setVisit(listTeamAux.get(listTeamAux.size()-1));
+				tupla.setVisit(listTeamAux.get(listTeamAux.size()-1));//carga como visitante
 			tableAux[i][0] = tupla;
 			i++;
 		}
@@ -34,7 +33,7 @@ public class Fixture{
 	}
 
 
-	/*metodo que realiza una pasada completa por la matriz completando con todos los equipos, exepto el ultimo, que
+	/*primer metodo que realiza una pasada completa por la matriz completando con todos los equipos, exepto el ultimo, que
 	jugaran de local y en los casos en los que ya habia un local en la primer fecha, los carga como visitantes*/
 	public static LocalVisit[][] completeLocal(ArrayList<String> listTeam, LocalVisit[][] aTable, int matches, int dates){
 		
