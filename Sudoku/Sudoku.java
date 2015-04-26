@@ -205,7 +205,9 @@ public class Sudoku{
 	
 
 
-	//metodo que clona el tablero
+	/*metodo que clona el tablero y evita el aliasing y poder tirar el tablero que tiene conflictos y volver
+	al tablero anterior y seguir probando los valores
+	*/
 	public static Integer[][] deepCopy(Integer[][] original) {
 	    if (original == null) {
 	        return null;
