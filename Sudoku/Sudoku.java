@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class Sudoku{
 
+	//metodo que dice si es posible resolver el sudoku o si no tiene solcion
 	public static Integer[][] sudokuResolve(Integer[][] board){
 		if(Sudoku.hasConflict(board))
 			return null;
@@ -38,6 +39,7 @@ public class Sudoku{
 		return solution;
 	}
 
+	//metodo que retorna true sii el tablero esta completo
 	public static Boolean isComplete(Integer[][] board){
 		for(int y = 0;y < 9;y++)
 			for(int x = 0;x < 9;x++)
@@ -46,6 +48,8 @@ public class Sudoku{
 		return true;
 	}
 
+	//metodo que retorna true sii el tablero presenta algun problema ya sea en las filas
+	//columnas o los cuadrantes comunes y win
 	public static Boolean hasConflict(Integer[][] board){
 		if(!Sudoku.checkAllSquare(board))
 			return true;
@@ -62,6 +66,7 @@ public class Sudoku{
 		return false;
 	}
 
+	//metodo que solo imprime por pantalla el estado del tablero
 	public static void show(Integer [][] tablero){
 		System.out.println("boar aux");
 		for ( int i = 0;i<9 ;i++ ) {
@@ -72,6 +77,7 @@ public class Sudoku{
 			}
 	}
 
+	//metodo que chequea el variante win
 	public static boolean checkWin(Integer[][] board){
 		int x;
 		int y;
@@ -128,7 +134,7 @@ public class Sudoku{
 		return true;
 	}
 
-
+	//metodo que devuelve true sii los cuadrados no presentan problemas
 	public static Boolean checkAllSquare(Integer[][] board){
 		int i = 0;
 		int j = 0;
@@ -155,7 +161,7 @@ public class Sudoku{
 	}
 
 
-
+	//metodo que retorna true sii la columna no presenta problema
 	public static boolean checkColumn (int column,Integer[][] board){
 		Boolean cond ;
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -172,6 +178,7 @@ public class Sudoku{
 
 	}
 
+	//metodo que retorna true sii la columna no presenta problemas
 	public static boolean checkRow (int row, Integer[][] board){
 		Boolean cond;
 		ArrayList<Integer> list = new ArrayList<Integer>();
@@ -189,7 +196,7 @@ public class Sudoku{
 	
 
 
-
+//metodo que clona el tablero
 public static Integer[][] deepCopy(Integer[][] original) {
     if (original == null) {
         return null;
@@ -198,8 +205,6 @@ public static Integer[][] deepCopy(Integer[][] original) {
     final Integer[][] result = new Integer[original.length][];
     for (int i = 0; i < original.length; i++) {
         result[i] = Arrays.copyOf(original[i], original[i].length);
-        // For Java versions prior to Java 6 use the next:
-        // System.arraycopy(original[i], 0, result[i], 0, original[i].length);
     }
     return result;
   }
