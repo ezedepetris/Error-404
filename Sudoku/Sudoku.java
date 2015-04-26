@@ -169,7 +169,11 @@ public class Sudoku{
 		}				
 		return true;
 	}
-
+	
+	/*en los siguientes metodos se utiliza la misma tecnica que en el checkwin y el checkalllsquare, se crea un conjunto
+	con valores del 1 al 9 y lueg por columna o fila se van eliminando los valores y retorna false si en algun caso se quiso eliminar
+	el mismo elemento dos veces si esto no pasa significa que no estan repetidos los valores y termina retornando true esto es igual
+	para el checkcolumn y el checksquare*/
 
 	//metodo que retorna true sii la columna no presenta problema
 	public static boolean checkColumn (int column,Integer[][] board){
