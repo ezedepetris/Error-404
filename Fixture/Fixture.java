@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Fixture{
 
+	//metodo principal que arma el fixture
 	public static void fixture (ArrayList<String> listTeam){
 		int team = listTeam.size();
 		int date = (team-1);
@@ -15,6 +16,8 @@ public class Fixture{
 
 	}
 
+	/*primer metodo que se encarga de cargar el primer partido de cada fecha solo con el ultimo equipo
+	alternando su condicion de localia y visita*/
 	public static LocalVisit[][] comoandas (ArrayList<String> listTeamAux, LocalVisit[][] tableAux, int dates){
 		int i = 0;
 		LocalVisit tupla;
@@ -31,30 +34,31 @@ public class Fixture{
 	}
 
 
-
-
-public static LocalVisit[][] completeLocal(ArrayList<String> listTeam, LocalVisit[][] aTable, int matches, int dates){
-	
-	int index = 0;
-	for (int x = 0; x< dates; x++){
-		for (int y = 0; y< matches; y++){
-			LocalVisit tupla = new LocalVisit();
-			if (y==0 && x%2==0)	//tratamiento especial para la primera columna
-				tupla.setVisit(listTeam.get(index));
-			else
-				tupla.setLocal(listTeam.get(index));
-			aTable[x][y]=tupla;
-			index++;
-			if(index>listTeam.size()-2)
-				index = 0;//reinicia el indice si termine de poner todos los equipos
+	/*metodo que realiza una pasada completa por la matriz completando con todos los equipos, exepto el ultimo, que
+	jugaran de local y en los casos en los que ya habia un local en la primer fecha, los carga como visitantes*/
+	public static LocalVisit[][] completeLocal(ArrayList<String> listTeam, LocalVisit[][] aTable, int matches, int dates){
+		
+		int index = 0;
+		for (int x = 0; x< dates; x++){
+			for (int y = 0; y< matches; y++){
+				LocalVisit tupla = new LocalVisit();
+				if (y==0 && x%2==0)	//tratamiento especial para la primera columna
+					tupla.setVisit(listTeam.get(index));
+				else
+					tupla.setLocal(listTeam.get(index));
+				aTable[x][y]=tupla;
+				index++;
+				if(index>listTeam.size()-2)
+					index = 0;//reinicia el indice si termine de poner todos los equipos
+			}
 		}
+		return aTable;
 	}
-	return aTable;
-}
 
 
 
-/** Pre : numOfTeams mod 2 = 0 **/
+	/*metodo que realiza la segunda y ultima pasada por la matriz completando con los quipos, exepto el ultimo, los cuales
+	seran todos visitantes*/
 	public static LocalVisit[][] addVisit(ArrayList<String> listOfTeamsAux, LocalVisit[][] tableAux, int matches, int dates){
 		int index = dates;
 		for (int x = 0; x < dates; x++){
@@ -72,7 +76,7 @@ public static LocalVisit[][] completeLocal(ArrayList<String> listTeam, LocalVisi
 	}	
 	
 
-
+	//metodo que solo se encarga de imprimir el estado del fixture
 	public static void printFixture(LocalVisit[][] tableAux, int matches, int dates){
 		LocalVisit aux;
 		for (int y = 0;  y < matches; y++){ //Evito la primer columna de la tabla, por eso i=1 y NO 1=0

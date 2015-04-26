@@ -1,6 +1,6 @@
 public class LocalVisit{
 
-/*clase que representa un partido en la parte de local va el equipo local y en el atributo visitante el equipo visitante*/
+/*clase que representa un partido en el atributo de local va el equipo local y en el atributo visitante el equipo visitante*/
 	 String local ;
 	 String visit ;
 

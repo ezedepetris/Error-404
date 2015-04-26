@@ -175,7 +175,6 @@ public class Sudoku{
 				return false;
 		}
 		return (true);
-
 	}
 
 	//metodo que retorna true sii la columna no presenta problemas
@@ -196,16 +195,16 @@ public class Sudoku{
 	
 
 
-//metodo que clona el tablero
-public static Integer[][] deepCopy(Integer[][] original) {
-    if (original == null) {
-        return null;
-    }
+	//metodo que clona el tablero
+	public static Integer[][] deepCopy(Integer[][] original) {
+	    if (original == null) {
+	        return null;
+	    }
 
-    final Integer[][] result = new Integer[original.length][];
-    for (int i = 0; i < original.length; i++) {
-        result[i] = Arrays.copyOf(original[i], original[i].length);
-    }
-    return result;
-  }
+	    final Integer[][] result = new Integer[original.length][];
+	    for (int i = 0; i < original.length; i++) {
+	        result[i] = Arrays.copyOf(original[i], original[i].length);
+	    }
+	    return result;
+	  }
 }
