@@ -1,17 +1,17 @@
 import java.util.ArrayList;
-
 import java.util.Arrays;
 
 public class Sudoku{
 
 	//metodo que dice si es posible resolver el sudoku o si no tiene solcion
 	public static Integer[][] sudokuResolve(Integer[][] board){
-		if(Sudoku.hasConflict(board))
+		if(Sudoku.hasConflict(board))//consulta si tiene conflictos, columnas, filas, win y por cuadrado
 			return null;
 
-		if (Sudoku.isComplete(board))
+		if (Sudoku.isComplete(board))//pregunta si tiene lugares vacios
 			return board;
-		Boolean found = false;
+			
+		Boolean found = false;//true si hay lugar vacio
 		int x = 0;
 		int y = 0;
 		while( x<9 && !found ){
@@ -33,10 +33,10 @@ public class Sudoku{
 			boardAux[x][y] = i;
 			solution = Sudoku.sudokuResolve(boardAux);
 			if (solution !=null )
-				solved =  true;
+				solved =  true;//si se lleno devuelve true y es porque es correcto
 			i++;
 		}
-		return solution;
+		return solution;//tablero o null si hubo onflictos
 	}
 
 	//metodo que retorna true sii el tablero esta completo
