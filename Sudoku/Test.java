@@ -11,7 +11,7 @@ public class Test{
 
 		 //tablero pre carcado
 		 
-		/*tablero[0][0]=5;
+		tablero[0][0]=5;
 		tablero[0][1]=4;
 		tablero[0][2]=3;
 		tablero[0][3]=9;
@@ -95,37 +95,8 @@ public class Test{
 		tablero[8][7]=9;
 		tablero[8][8]=3;
 		
-		Integer[][] cuadradito = new Integer[3][3];
-		cuadradito[0][0]=9;
-		cuadradito[0][1]=1;
-		cuadradito[0][2]=2;
-		cuadradito[1][0]=3;
-		cuadradito[1][1]=4;
-		cuadradito[1][2]=5;
-		cuadradito[2][0]=6;
-		cuadradito[2][1]=7;
-		cuadradito[2][2]=8;*/
-
-
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		Boolean cond = false;
-		Boolean con2 = true;
-		for(Integer i = 1; i<=9;i++)
-			list.add(i);
-
-		for(int y = 0; y < 3; y++){
-			for(int x = 0; x <3; x++){
-				cond = list.remove(cuadradito[x][y]);
-			if(cuadradito[x][y]!=null&&!cond)
-				con2 = false;
-			}
-		}
-		System.out.print(con2+" ");
+		tablero = Sudoku.sudokuResolve(tablero);
 		
-
-		 tablero = Sudoku.sudokuResolve(tablero);
-		System.out.println(Sudoku.checkAllSquare(tablero));
-
 		if (tablero != null) {
 			for ( int i = 0;i<9 ;i++ ) {
 				for ( int j = 0;j<9 ;j++ ) {
