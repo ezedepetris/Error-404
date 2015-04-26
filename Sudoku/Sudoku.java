@@ -36,7 +36,7 @@ public class Sudoku{
 				solved =  true;//si se lleno devuelve true y es porque es correcto
 			i++;
 		}
-		return solution;//tablero o null si hubo onflictos
+		return solution;//retorna el tablero o null si hubo onflictos
 	}
 
 	//metodo que retorna true sii el tablero esta completo
@@ -84,12 +84,18 @@ public class Sudoku{
 		int i;
 		Boolean cond = true;
 		ArrayList<Integer> list = new ArrayList<Integer>();
-
+		/*creamos un conjunto con valores del 1 al 9 luego iremos sacando elemento por elemento del cuadrante y
+		luego si querermos sacar un mismo elemento dos veces retorna false y hacemos esto para todos los cuadrantes
+		por cuadrntes vaciamos y lllenamos el conjunto de valores*/
 		for(i = 1; i<=9;i++)
 			list.add(i);
 
 		for(y = 1; y <= 3; y++){
 			for(x = 1; x <=3; x++){
+			/*lo que hacemos en esta sesion es ire eliminando elementos del cuadrante y esto devuelve true si se pudo
+			borrar y false si no s epudo borrar, si nos e pudo borrar pasan dos cosas que el elemento ya alla sido borrado o que
+			en esa posicion haya sido null por eso controlamos que solo devuelva false si no se pudo borrar y que en esa posicion halla
+			algo que sea distinto de null, esto se hace para todos los cuadrantes al igualr que el check square utiliza la misma tecnica*/
 				cond = list.remove(board[x][y]);
 			if(board[x][y]!=null&&!cond)
 				return false;
