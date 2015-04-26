@@ -146,6 +146,10 @@ public class Sudoku{
 		int j = 0;
 		Boolean cond = true;
 		ArrayList<Integer> list = new ArrayList<Integer>();
+		/*en este metodo se chequea los cuadrados de 3x3 verificando que solo halla valores del 1 al 9 en cada cuadrante
+		vamos verificando los tres primeros cuadrantes horizontales luego los segundos tres cuadrantes horizontales y luego
+		y luego los ultimos tres cuadrantes si en algun momento  hubo conflicto retorna false pero si pasa los nueve cuadrantes retorna 
+		true porque significa que no hubo conflicto*/
 		while(i<9){
 			j=0;
 			while(j<9){
