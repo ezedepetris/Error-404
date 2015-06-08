@@ -43,11 +43,11 @@ public class AtomProblem implements AdversarySearchProblem<AtomState>{
 			for (int j = 0; j<10; j++){
 				if(s.board[i][j]!=null){
 					if((i == 0 || i == 5) && (j == 0 || j == 9))
-						aux = s.board[i][j].getValue() * 2;
+						aux = s.board[i][j].getNumber() * 2;
 					if((i==0 && j < 9 && j>0)||(i==5 && j < 9 && j>0)||(j==0 && i < 4 && i>0)||(j==9 && i < 4 && i>0))
-						aux = s.board[i][j].getValue() * 3;
+						aux = s.board[i][j].getNumber() * 3;
 					if(i != 0 && j != 0 && i != 5 && j != 9)
-						aux = s.board[i][j].getValue() * 4;
+						aux = s.board[i][j].getNumber() * 4;
 
 					if(s.board[i][j].getPlayer() == 1)
 						pc += aux;
