@@ -9,7 +9,7 @@ public class AtomProblem implements AdversarySearchProblem<AtomState>{
 	}
 
 	public List<AtomState> getSuccessors(AtomState s) {
-		??????
+		
 	}
 
 
