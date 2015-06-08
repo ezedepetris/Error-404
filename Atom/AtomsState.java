@@ -26,11 +26,14 @@ public class AtomsState implements State{
 	}
 
 	public String toString(){
+		String string = "";
 		for (int i=0; i<6; i++) {
 			for (int j = 0; j<10; j++) {
-				
+				string += board[x][y]+" ";
 			}
+			string += "\n"
 		}
+		return string;
 	}
 
 }
