@@ -6,6 +6,8 @@ public class AtomsState implements State{
 	
 	public AtomsState(){
 		board = new Atoms[6][10];
+		board [0][0] = new Atom(1);
+		board [5][9] = new Atom(2);
 	}
 
 	public AtomsState(int x, int y,Atoms element){
