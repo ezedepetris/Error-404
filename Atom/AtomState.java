@@ -24,7 +24,7 @@ public class AtomState implements AdversarySearchState{
 			for (int j = 0; j<10; j++) {
 				if((this.board.[i][j]!=null && s.board.[i][j]==null) || (s.board.[i][j]!=null && this.board.[i][j]==null))
 					return false;
-				if (this.board.[i][j]!=null && s.board.[i][j]!=null){//falta retornar false si alguna de las dos es null
+				if (this.board.[i][j]!=null && s.board.[i][j]!=null){
 					if (this.board.[i][j].getNumber()!=s.board.[i][j].getNumber() || this.board.[i][j].getPlayer()!=s.board.[i][j].getPlayer())
 						flag = false;
 				}
