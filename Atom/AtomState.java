@@ -11,7 +11,7 @@ public class AtomsState implements AdversarySearchState{
 		board [5][9] = new Atom(2);
 	}
 
-	public AtomsState(int x, int y,Atoms element){
+	public AtomsState(int x, int y,Atoms eslement){
 		board[x][y] = element;
 	}
 	
@@ -19,8 +19,8 @@ public class AtomsState implements AdversarySearchState{
 		boolean flag = true;
 		for (int i=0; i<6; i++) {
 			for (int j = 0; j<10; j++) {
-				if (this[i][j]!=null){
-					if (this[i][j].getNumber()!=s[i][j].getNumber() || this[i][j].getPlayer()!=s[i][j].getPlayer())
+				if (this.[i][j]!=null){
+					if (this.[i][j].getNumber()!=s[i][j].getNumber() || this.[i][j].getPlayer()!=s[i][j].getPlayer())
 						flag = false;
 				}
 			}
