@@ -13,7 +13,16 @@ public class AtomsState implements State{
 	}
 	
 	public boolean equals(State s){
-
+		boolean flag = true;
+		for (int i=0; i<6; i++) {
+			for (int j = 0; j<10; j++) {
+				if (this[i][j]!=null){
+					if (this[i][j].getNumber()!=s[i][j].getNumber() || this[i][j].getPlayer()!=s[i][j].getPlayer())
+						flag = false;
+				}
+			}
+		}
+		return false;
 	}
 
 	public String toString(){
