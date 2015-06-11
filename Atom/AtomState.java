@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import libraries.ab   sstract.State;
-=======
 import libraries.abstract.AdversarySearchState;
->>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 import java.util.*;
 
 public class AtomState implements AdversarySearchState{
@@ -56,17 +52,4 @@ public class AtomState implements AdversarySearchState{
 	public Object ruleApplied(){
 		return null;
 	}
-
-<<<<<<< HEAD
-	
-=======
-
-
-
-
-
-
-
-
->>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 }
