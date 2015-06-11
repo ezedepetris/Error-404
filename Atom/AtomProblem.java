@@ -1,7 +1,7 @@
-import libraries.abstract.AbstractImformedSearchProblem;
+import libraries.abstract.AdversarySearchProblem;
 import java.util.*;
 
-public class AtomProblem implements AbstractImformedSearchProblem<AtomState>{
+public class AtomProblem implements AdversarySearchProblem<AtomState>{
 	private AtomState init;
 
 	public ReinaState initialState(){
@@ -9,6 +9,7 @@ public class AtomProblem implements AbstractImformedSearchProblem<AtomState>{
 	}
 
 	public List<AtomState> getSuccessors(AtomState s) {
+<<<<<<< HEAD
 		List<AtomState> list = new List<AtomState>();
 		int player;
 		if (s.isMax())
@@ -31,13 +32,38 @@ public class AtomProblem implements AbstractImformedSearchProblem<AtomState>{
 			}
 		}
 		return list;
+=======
+	List<AtomState> list = new List<AtomState>();
+	int player;	
+	if(s.isMax())
+		player = 1;
+	else
+		player = 2;
+	for (int i = 0; i<6; i++){
+		for (int j = 0; j<10; j++){
+			Atom atom = new Atom(player);
+   		AtomState aux = s;
+			if(s.board[i][j]==null){
+				aux = new AtomState(i,j,atom);
+				list.add(aux);
+			}
+			else{
+				if ((s.board[i][j]).getPlayer()==player){//computer is player1
+					//AtomState aux = s.putAToken(i,j);
+					list.add(putAnAtom(i,j,atom));
+				}
+			} 
+		}
+>>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 	}
-
+	return list;
+}
 
 	public Boolean succes(AtomState s){
-		int i;
+		int i = 0;
 		int x = 0;
 		int y = 0;
+<<<<<<< HEAD
 		boolean found = false;
 		
 		while(x<=5 && !found){
@@ -46,6 +72,13 @@ public class AtomProblem implements AbstractImformedSearchProblem<AtomState>{
 					i = board[x][y].getPlayer();
 					found = true;
 				}
+=======
+
+		while(x<=5){
+			while(y<=9){
+				if(board[x][y]!= null)
+					i = board[x][y].getPlayer();
+>>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 				y++;
 			}
 			x++;
@@ -61,12 +94,54 @@ public class AtomProblem implements AbstractImformedSearchProblem<AtomState>{
 	}
 
 	public int getValue(AtomState s){
+<<<<<<< HEAD
 	}
 
 	public Comparator<AtomState> getComparator(){
 	}
 
 	public void putAnAtom1(int i, int j,Atom atom, AtomState s){
+=======
+		int pc = 0;
+		int human = 0;
+		for (int i = 0; i<6; i++){
+			for (int j = 0; j<10; j++){
+				if(s.board[i][j]!=null){
+					if((i == 0 || i == 5) && (j == 0 || j == 9))
+						aux = s.board[i][j].getNumber() * 2;
+					if((i==0 && j < 9 && j>0)||(i==5 && j < 9 && j>0)||(j==0 && i < 4 && i>0)||(j==9 && i < 4 && i>0))
+						aux = s.board[i][j].getNumber() * 3;
+					if(i != 0 && j != 0 && i != 5 && j != 9)
+						aux = s.board[i][j].getNumber() * 4;
+
+					if(s.board[i][j].getPlayer() == 1)
+						pc += aux;
+					else
+						human += aux;
+				}
+			} 
+		}
+		if (s.isMax())
+			return pc - human;
+		return humn - pc;
+	}
+
+	public Comparator<AtomState> getComparator(){
+		return this;
+		}
+
+
+
+
+
+	public AtomState putAnAtom(AtomState s,int i, int j,Atom atom){
+		s.putAnAtom1(int i, int j,Atom atom);
+		return s;
+
+	}
+
+	public void putAnAtom1(AtomState s, int i, int j,Atom atom){
+>>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 		if(s.board[i][j] == null)
 			s.board[i][j]= atom;
 		else{
@@ -131,11 +206,31 @@ public class AtomProblem implements AbstractImformedSearchProblem<AtomState>{
 				}//lateral genreal
 			}
 		}
+<<<<<<< HEAD
 	}
 	
 	public AtomState putAnAtom(int i, int j,Atom atom, AtomState s){
 		s.putAnAtom1(int i, int j,Atom atom);
 		return s;
+=======
+>>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

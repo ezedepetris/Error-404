@@ -1,12 +1,16 @@
+<<<<<<< HEAD
 import libraries.ab   sstract.State;
+=======
+import libraries.abstract.AdversarySearchState;
+>>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 import java.util.*;
 
-public class AtomsState implements AdversarySearchState{
+public class AtomState implements AdversarySearchState{
 	Atoms[][] board ;
 	boolean flag;
 	
-	public AtomsState(){
-		board = new Atoms[6][10];
+	public AtomState(){
+		board = new Atom[6][10];
 		board [0][0] = new Atom(1);
 		board [5][9] = new Atom(2);
 	}
@@ -22,8 +26,10 @@ public class AtomsState implements AdversarySearchState{
 		boolean flag = true;
 		for (int i=0; i<6; i++) {
 			for (int j = 0; j<10; j++) {
-				if (this[i][j]!=null){
-					if (this[i][j].getNumber()!=s[i][j].getNumber() || this[i][j].getPlayer()!=s[i][j].getPlayer())
+				if((this.board[i][j]!=null && s.board[i][j]==null) || (s.board[i][j]!=null && this.board[i][j]==null))
+					return false;
+				if (this.board[i][j]!=null && s.board[i][j]!=null){
+					if (this.board[i][j].getNumber()!=s.board[i][j].getNumber() || this.board[i][j].getPlayer()!=s.board[i][j].getPlayer())
 						flag = false;
 				}
 			}
@@ -51,5 +57,16 @@ public class AtomsState implements AdversarySearchState{
 		return null;
 	}
 
+<<<<<<< HEAD
 	
+=======
+
+
+
+
+
+
+
+
+>>>>>>> 4c94ff59c57133af965357691848bfef5d027dae
 }
