@@ -22,10 +22,10 @@ public class AtomState implements AdversarySearchState{
 		boolean flag = true;
 		for (int i=0; i<6; i++) {
 			for (int j = 0; j<10; j++) {
-				if((this.board.[i][j]!=null && s.board.[i][j]==null) || (s.board.[i][j]!=null && this.board.[i][j]==null))
+				if((this.board[i][j]!=null && s.board[i][j]==null) || (s.board[i][j]!=null && this.board[i][j]==null))
 					return false;
-				if (this.board.[i][j]!=null && s.board.[i][j]!=null){
-					if (this.board.[i][j].getNumber()!=s.board.[i][j].getNumber() || this.board.[i][j].getPlayer()!=s.board.[i][j].getPlayer())
+				if (this.board[i][j]!=null && s.board[i][j]!=null){
+					if (this.board[i][j].getNumber()!=s.board[i][j].getNumber() || this.board[i][j].getPlayer()!=s.board[i][j].getPlayer())
 						flag = false;
 				}
 			}
@@ -52,5 +52,13 @@ public class AtomState implements AdversarySearchState{
 	public Object ruleApplied(){
 		return null;
 	}
+
+
+
+
+
+
+
+
 
 }
