@@ -1,4 +1,4 @@
-import libraries.abstract.State;
+import libraries.ab   sstract.State;
 import java.util.*;
 
 public class AtomsState implements AdversarySearchState{
@@ -11,8 +11,11 @@ public class AtomsState implements AdversarySearchState{
 		board [5][9] = new Atom(2);
 	}
 
-	public AtomsState(int x, int y,Atoms element){
-		board[x][y] = element;
+	public AtomState(int x, int y,Atom eslement){
+		if(board[x][y]==null)
+			board[x][y] = element;
+		else
+			board[x][y] = board[x][y].setAtom(element.getPlayer());
 	}
 	
 	public boolean equals(AdversarySearchState s){
@@ -48,4 +51,5 @@ public class AtomsState implements AdversarySearchState{
 		return null;
 	}
 
+	
 }
