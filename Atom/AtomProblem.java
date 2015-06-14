@@ -8,8 +8,8 @@ public class AtomProblem implements AdversarySearchProblem<AtomState>{
 		return new AtomState();
 	}
 
-public List<AtomState> getSuccessors(AtomState state) {
-	List<AtomState> list = new List<AtomState>();
+public LinkedList<AtomState> getSuccessors(AtomState state) {
+	LinkedList<AtomState> list = new LinkedList<AtomState>();
 	int player;	
 	if(state.isMax())
 		player = 1;
@@ -26,7 +26,7 @@ public List<AtomState> getSuccessors(AtomState state) {
 			else{
 				if ((state.board[i][j]).getPlayer()==player){//computer is player1
 					//AtomState aux = state.putAToken(i,j);
-					list.add(putAnAtom(i,j,atom));
+					list.add(putAnAtom(state,i,j,atom));
 				}
 			} 
 		}
@@ -34,15 +34,15 @@ public List<AtomState> getSuccessors(AtomState state) {
 	return list;
 }
 
-	public Boolean succes(AtomState s){
-		int i = 0;
+	public boolean end(AtomState s){
+		int player = 0;
 		int x = 0;
 		int y = 0;
 		Boolean found = false;
 		while(x<=5 && !found){
 			while(y<=9 && !found){
-				if(this.board[x][y]!= null){
-					i = this.board[x][y].getPlayer();
+				if(s.board[x][y]!= null){
+					player = s.board[x][y].getPlayer();
 					found = true;
 				}
 				y++;
@@ -52,49 +52,44 @@ public List<AtomState> getSuccessors(AtomState state) {
 
 		for (int i = 0; i<6; i++)
 			for (int j = 0; j<10; j++) 
-				if(this.board[i][j]!=null)
-					if(this.board[i][j].getPlayer() != i)
+				if(s.board[i][j]!=null)
+					if(s.board[i][j].getPlayer() != player)
 						return false;
 		return true;
 
 	}
 
-	public int getValue(){
+	public int value(AtomState state){
 		int aux = 0;
 		int pc = 0;
 		int human = 0;
 		for (int i = 0; i<6; i++){
 			for (int j = 0; j<10; j++){
-				if(this.board[i][j]!=null){
+				if(state.board[i][j]!=null){
 					if((i == 0 || i == 5) && (j == 0 || j == 9))
-						aux = this.board[i][j].getNumber() * 2;
+						aux = state.board[i][j].getNumber() * 2;
 					if((i==0 && j < 9 && j>0)||(i==5 && j < 9 && j>0)||(j==0 && i < 4 && i>0)||(j==9 && i < 4 && i>0))
-						aux = this.board[i][j].getNumber() * 3;
+						aux = state.board[i][j].getNumber() * 3;
 					if(i != 0 && j != 0 && i != 5 && j != 9)
-						aux = this.board[i][j].getNumber() * 4;
+						aux = state.board[i][j].getNumber() * 4;
 
-					if(this.board[i][j].getPlayer() == 1)
+					if(state.board[i][j].getPlayer() == 1)
 						pc += aux;
 					else
 						human += aux;
 				}
 			} 
 		}
-		if (this.isMax())
+		if (state.isMax())
 			return pc - human;
-		return humn - pc;
+		return human - pc;
 	}
-
-	public Comparator<AtomState> getComparator(){
-		return this;
-		}
-
 
 
 
 
 	public AtomState putAnAtom(AtomState s,int i, int j,Atom atom){
-		s.putAnAtom1(i,j, atom);
+		putAnAtom1(s,i,j, atom);
 		return s;
 
 	}
@@ -105,60 +100,60 @@ public List<AtomState> getSuccessors(AtomState state) {
 		else{
 			s.board[i][j].setAtom(atom.getPlayer());
 			if (i>0 && i<5 && j>0 && j<9){
-				if ((s.board[i][j]).getNumber==4){
+				if ((s.board[i][j]).getNumber()==4){
 					s.board[i][j] = null;
-					s.putAnAtom1(i-1,j,atom);
-					s.putAnAtom1(i,j-1,atom);
-					s.putAnAtom1(i,j+1,atom);
-					s.putAnAtom1(i+1,j,atom);
+					putAnAtom1(s,i-1,j,atom);
+					putAnAtom1(s,i,j-1,atom);
+					putAnAtom1(s,i,j+1,atom);
+					putAnAtom1(s,i+1,j,atom);
 				}
 				else{//lateral general
-					if ((s.board[i][j]).getNumber==3){
+					if ((s.board[i][j]).getNumber()==3){
 						if (i==0 && j>0 && j<9){//horizontal arriba
 								s.board[i][j] = null;
-								s.putAnAtom1(i+1,j,atom);
-								s.putAnAtom1(i,j-1,atom);
-								s.putAnAtom1(i,j+1,atom);
+								putAnAtom1(s,i+1,j,atom);
+								putAnAtom1(s,i,j-1,atom);
+								putAnAtom1(s,i,j+1,atom);
 						}
 						if (i==5 && j>0 && j<9){//horizontal abajo
 								s.board[i][j] = null;
-								s.putAnAtom1(i-1,j,atom);
-								s.putAnAtom1(i,j-1,atom);
-								s.putAnAtom1(i,j+1,atom);
+								putAnAtom1(s,i-1,j,atom);
+								putAnAtom1(s,i,j-1,atom);
+								putAnAtom1(s,i,j+1,atom);
 						}
 						if (i>0 && i<5 && j==0){//vertical izquierda
 								s.board[i][j] = null;
-								s.putAnAtom1(i+1,j,atom);
-								s.putAnAtom1(i-1,j,atom);
-								s.putAnAtom1(i,j+1,atom);
+								putAnAtom1(s,i+1,j,atom);
+								putAnAtom1(s,i-1,j,atom);
+								putAnAtom1(s,i,j+1,atom);
 						}
 						if (i>0 && i<5 && j==9){//vertical derecha
 								s.board[i][j] = null;
-								s.putAnAtom1(i+1,j,atom);
-								s.putAnAtom1(i-1,j,atom);
-								s.putAnAtom1(i,j-1,atom);
+								putAnAtom1(s,i+1,j,atom);
+								putAnAtom1(s,i-1,j,atom);
+								putAnAtom1(s,i,j-1,atom);
 						}
 					}
 					else{
 						if(i==0 && j==0){
 							s.board[i][j] = null;
-							s.putAnAtom1(i+1,j,atom);
-							s.putAnAtom1(i,j+1,atom);
+							putAnAtom1(s,i+1,j,atom);
+							putAnAtom1(s,i,j+1,atom);
 						}
 						if(i==0 && j==9){
 							s.board[i][j] = null;
-							s.putAnAtom1(i+1,j,atom);
-							s.putAnAtom1(i,j-1,atom);
+							putAnAtom1(s,i+1,j,atom);
+							putAnAtom1(s,i,j-1,atom);
 						}
 						if(i==5 && j==0){
 							s.board[i][j] = null;
-							s.putAnAtom1(i-1,j,atom);
-							s.putAnAtom1(i,j+1,atom);
+							putAnAtom1(s,i-1,j,atom);
+							putAnAtom1(s,i,j+1,atom);
 						}
 						if(i==5 && j==9){
 							s.board[i][j] = null;
-							s.putAnAtom1(i-1,j,atom);
-							s.putAnAtom1(i,j-1,atom);
+							putAnAtom1(s,i-1,j,atom);
+							putAnAtom1(s,i,j-1,atom);
 						}
 					}
 				}//lateral genreal
@@ -166,6 +161,13 @@ public List<AtomState> getSuccessors(AtomState state) {
 		}
 	}
 
+
+public int maxValue(){
+	return 100;
+}
+public int minValue(){
+	return 10;
+}
 
 
 
