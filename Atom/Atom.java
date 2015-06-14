@@ -1,3 +1,4 @@
+
 public class Atom{
 
 	private int player;

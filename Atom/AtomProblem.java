@@ -1,31 +1,31 @@
-import libraries.abstract.AdversarySearchProblem;
+import libraries.ab.AdversarySearchProblem;
 import java.util.*;
 
 public class AtomProblem implements AdversarySearchProblem<AtomState>{
 	private AtomState init;
 
-	public ReinaState initialState(){
+	public void initialState(){
 		init = new AtomState();
 	}
 
-public List<AtomState> getSuccessors(AtomState s) {
+public List<AtomState> getSuccessors(Atom state) {
 	List<AtomState> list = new List<AtomState>();
 	int player;	
-	if(s.isMax())
+	if(state.isMax())
 		player = 1;
 	else
 		player = 2;
 	for (int i = 0; i<6; i++){
 		for (int j = 0; j<10; j++){
 			Atom atom = new Atom(player);
-   		AtomState aux = s;
-			if(s.board[i][j]==null){
+   		AtomState aux = state;
+			if(state.board[i][j]==null){
 				aux = new AtomState(i,j,atom);
 				list.add(aux);
 			}
 			else{
-				if ((s.board[i][j]).getPlayer()==player){//computer is player1
-					//AtomState aux = s.putAToken(i,j);
+				if ((state.board[i][j]).getPlayer()==player){//computer is player1
+					//AtomState aux = state.putAToken(i,j);
 					list.add(putAnAtom(i,j,atom));
 				}
 			} 
@@ -41,8 +41,8 @@ public List<AtomState> getSuccessors(AtomState s) {
 		Boolean found = false;
 		while(x<=5 && !found){
 			while(y<=9 && !found){
-				if(board[x][y]!= null){
-					i = board[x][y].getPlayer();
+				if(this.board[x][y]!= null){
+					i = this.board[x][y].getPlayer();
 					found = true;
 				}
 				y++;
@@ -52,34 +52,35 @@ public List<AtomState> getSuccessors(AtomState s) {
 
 		for (int i = 0; i<6; i++)
 			for (int j = 0; j<10; j++) 
-				if(board[i][j]!=null)
-					if(board[i][j].getPlayer() != i)
+				if(this.board[i][j]!=null)
+					if(this.board[i][j].getPlayer() != i)
 						return false;
 		return true;
 
 	}
 
-	public int getValue(AtomState s){
+	public int getValue(){
+		int aux = 0;
 		int pc = 0;
 		int human = 0;
 		for (int i = 0; i<6; i++){
 			for (int j = 0; j<10; j++){
-				if(s.board[i][j]!=null){
+				if(this.board[i][j]!=null){
 					if((i == 0 || i == 5) && (j == 0 || j == 9))
-						aux = s.board[i][j].getNumber() * 2;
+						aux = this.board[i][j].getNumber() * 2;
 					if((i==0 && j < 9 && j>0)||(i==5 && j < 9 && j>0)||(j==0 && i < 4 && i>0)||(j==9 && i < 4 && i>0))
-						aux = s.board[i][j].getNumber() * 3;
+						aux = this.board[i][j].getNumber() * 3;
 					if(i != 0 && j != 0 && i != 5 && j != 9)
-						aux = s.board[i][j].getNumber() * 4;
+						aux = this.board[i][j].getNumber() * 4;
 
-					if(s.board[i][j].getPlayer() == 1)
+					if(this.board[i][j].getPlayer() == 1)
 						pc += aux;
 					else
 						human += aux;
 				}
 			} 
 		}
-		if (s.isMax())
+		if (this.isMax())
 			return pc - human;
 		return humn - pc;
 	}
@@ -93,7 +94,7 @@ public List<AtomState> getSuccessors(AtomState s) {
 
 
 	public AtomState putAnAtom(AtomState s,int i, int j,Atom atom){
-		s.putAnAtom1(int i, int j,Atom atom);
+		s.putAnAtom1(i,j, atom);
 		return s;
 
 	}
@@ -175,7 +176,8 @@ public List<AtomState> getSuccessors(AtomState s) {
 
 
 
-
+//17:55:07 ezequiel@MacBook-Air-de-Ezequiel.local Atom master ? javac -cp ../../:. AtomProblem.java                                                                             1 ↵
+   
 
 
 
