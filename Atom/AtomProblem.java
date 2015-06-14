@@ -2,13 +2,13 @@ import libraries.ab.AdversarySearchProblem;
 import java.util.*;
 
 public class AtomProblem implements AdversarySearchProblem<AtomState>{
-	private AtomState init;
+	AtomState init;
 
-	public void initialState(){
-		init = new AtomState();
+	public AtomState initialState(){
+		return new AtomState();
 	}
 
-public List<AtomState> getSuccessors(Atom state) {
+public List<AtomState> getSuccessors(AtomState state) {
 	List<AtomState> list = new List<AtomState>();
 	int player;	
 	if(state.isMax())
@@ -176,12 +176,6 @@ public List<AtomState> getSuccessors(Atom state) {
 
 
 
-//17:55:07 ezequiel@MacBook-Air-de-Ezequiel.local Atom master ? javac -cp ../../:. AtomProblem.java                                                                             1 ↵
-   
-
-
-
-
-
+/*ezequiel@MacBook-Air-de-Ezequiel.local/Atom javac -cp ../../:. AtomProblem.java*/
 
 }
