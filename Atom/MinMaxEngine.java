@@ -1,73 +1,72 @@
-package engines;
+/*this class modela the behaviour of the opponent and help to choose the best choise */
 import static java.lang.Math.*;
-import java.util.List;
+import java.util.*;
 
-public abstract class MinMaxEngine <S extends State, Problem extends AdversarySearchProblem<S>> extends AdversarySearchEngine<S,Problem> {
+public class MinMaxEngine <P extends AdversarySearchProblem<State>, State extends AdversarySearchState> extends AdversarySearchEngine<P,State> {
   
   public MinMaxEngine(){
   	super();
   }
 
-  public MinMaxEngine(Problem p){
+	public MinMaxEngine(P p){
   	super(p);
   }
 
-  public MinMaxEngine(Problem p, int level){
-  	super(p,level);
+  public MinMaxEngine(P p,int maxDepth){
+  	super(p,maxDepth);
   }
 
-	public int minMaxAB (S n,int alfa, int beta, int maxLevel){ 
-		s.flag = maxLevel%2==0;
-		if(n.succes()||n.getSuccessors()==null || maxLevel==0)
-			return n.getValue();
+	public int minMaxAB (State s,int alfa, int beta, int maxLevel){ 
+		if(problem.end(s)|| maxLevel==0)
+			return problem.value(s);
 		else{
-			List<S> successors = n.getSuccessors();
-			while (!successors.isEmpty() && alfa<beta ){ 
-				if( n.isMax())
+			List<State> successors = problem.getSuccessors(s);
+			while (!successors.isEmpty() && alfa<beta){ 
+				if(s.isMax())
 					alfa = max(alfa, minMaxAB(successors.get(0), alfa, beta,maxLevel-1));
 				else
 					beta = min(beta, minMaxAB(successors.get(0), alfa, beta,maxLevel-1));
 				successors.remove(0);
 			}
-			if (n.isMax)
+			if (s.isMax())
 				return alfa;
-			else
-				return beta;
+			
+			return beta;
 		}
 	}
 
-
+/* this method uses min max for give a state value*/
 	public int computeValue(State state){
-		return minMaxAB(state,MIN_VALUE,MAX_VALUE,level);
-
+		return minMaxAB(state,-1000,1000,maxDepth);
 	}	
 
-
-public State computeSuccessor(State state){
-		List<State> successors = Problem.getSuccessors(state);
-		List<Pair<State,Integer>> successorsValues = new List<Pair<State,Integer>>();
+/* this method select the best state between the all successors state*/
+	public State computeSuccessor(State state){
+		List<State> successors = problem.getSuccessors(state);
+		LinkedList<Doublet<State,Integer>> successorsValues = new LinkedList<Doublet<State,Integer>>();
 		while (!successors.isEmpty()){
-			successorsValues.add(new Pair<State,Integer>(successors.get(0),computeValue(successors.get(0)));
+			successorsValues.add(new Doublet<State,Integer>(successors.get(0),computeValue(successors.get(0))));
 			successors.remove(0);
 		}
 		int max = 0;
 		int i =0;
 		while (i<successorsValues.size()){
-			if (successorsValues.get(max).getRight() < successorsValues.get(i).getRight()){
+			if (successorsValues.get(max).getSnd() < successorsValues.get(i).getSnd()){
 				max = i;
 			}
 			i++;
 		}
-		return successorsValues.get(max).getLeft();
+		return successorsValues.get(max).getFst();
 	}
 
+
+	public void setProblem(P p) {
+        problem = p;
+    }
 
 	public void report(){
 
 	}
 
-	public void setProblem(P p) {
-        problem = p;
-    }
-	
+
 }
